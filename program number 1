@@ -1,0 +1,31 @@
+#include <stdio.h>
+
+int main() {
+    char sentence[1000];
+
+    // Input sentence
+    printf("Enter a sentence: ");
+    fgets(sentence, sizeof(sentence), stdin);
+
+    // Capitalize the first letter of the sentence
+    if (sentence[0] >= 'a' && sentence[0] <= 'z') {
+        sentence[0] = sentence[0] - 'a' + 'A';
+    }
+
+    // Loop through the sentence to capitalize the first letter of each word
+    for (int i = 1; sentence[i] != '\0'; i++) {
+        if ((sentence[i - 1] == ' ' || sentence[i - 1] == '\t' || sentence[i - 1] == '\n') &&
+            (sentence[i] >= 'a' && sentence[i] <= 'z')) {
+            // If the previous character is a space, tab, or newline, and the current character is a lowercase letter, capitalize it
+            sentence[i] = sentence[i] - 'a' + 'A';
+        } else if (sentence[i] >= 'A' && sentence[i] <= 'Z') {
+            // If the current character is an uppercase letter, convert it to lowercase
+            sentence[i] = sentence[i] - 'A' + 'a';
+        }
+    }
+
+    // Output the modified sentence
+    printf("Capitalized Sentence: %s\n", sentence);
+
+    return 0;
+}
